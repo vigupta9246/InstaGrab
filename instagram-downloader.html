@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download Instagram Videos, Reels, Photos, Stories & Audio instantly. Free HD quality downloads with no login required. Fast, safe, and unlimited.">
+    <meta name="keywords" content="instagram downloader, download instagram videos, instagram reels downloader, save instagram stories, download instagram photos">
+    <title>Instagram Downloader - Download Videos, Reels, Photos & Stories in HD</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #5448E0;
+            --secondary: #FF6584;
+            --accent: #4ECDC4;
+            --bg-primary: #FAFBFF;
+            --bg-secondary: #F5F7FF;
+            --text-primary: #1A1A2E;
+            --text-secondary: #6B7280;
+            --white: #FFFFFF;
+            --border: #E5E7EB;
+            --success: #10B981;
+            --shadow-sm: 0 2px 8px rgba(108, 99, 255, 0.08);
+            --shadow-md: 0 4px 20px rgba(108, 99, 255, 0.12);
+            --shadow-lg: 0 8px 40px rgba(108, 99, 255, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, -30px) scale(1.1); }
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Download Box */
+        .download-box {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            animation: scaleIn 0.8s ease-out 0.4s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .url-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .url-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+        }
+
+        .download-btn {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            font-family: 'DM Sans', sans-serif;
+            white-space: nowrap;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .supported-formats {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .format-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Ad Space */
+        .ad-space {
+            max-width: 728px;
+            height: 90px;
+            margin: 2rem auto;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .ad-space-sidebar {
+            width: 300px;
+            height: 250px;
+            margin: 2rem auto;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Section */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* How It Works */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .step-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--bg-secondary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-secondary);
+        }
+
+        .faq-icon {
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+            color: var(--primary);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Legal Pages */
+        .legal-page {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .legal-page h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .legal-page h2 {
+            font-size: 1.75rem;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        .legal-page h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .legal-page p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .legal-page ul {
+            margin: 1rem 0 1rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .legal-page li {
+            margin-bottom: 0.5rem;
+        }
+
+        .updated-date {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .download-btn {
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .steps-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hide pages by default */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <div class="logo-icon">📥</div>
+                <span>InstaGrab</span>
+            </a>
+            <nav class="nav">
+                <a href="#" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('about')">About</a>
+                <a href="#" onclick="showPage('contact')">Contact</a>
+                <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+                <a href="#" onclick="showPage('terms')">Terms</a>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <h1>Download Instagram Videos, Reels, Photos & Stories Instantly</h1>
+                <p class="hero-subtitle">Paste your Instagram link below and download your favorite content in HD quality for free.</p>
+                
+                <!-- Download Box -->
+                <div class="download-box">
+                    <div class="input-group">
+                        <input type="text" class="url-input" placeholder="Paste Instagram URL here (video, reel, photo, story)..." id="urlInput">
+                        <button class="download-btn" onclick="handleDownload()">Paste Link & Download</button>
+                    </div>
+                    <div class="supported-formats">
+                        <span class="format-tag">🎥 Videos</span>
+                        <span class="format-tag">🎬 Reels</span>
+                        <span class="format-tag">📸 Photos</span>
+                        <span class="format-tag">📖 Stories</span>
+                        <span class="format-tag">🎵 Audio</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Space - Top Banner -->
+        <div class="ad-space">Advertisement Space (728x90)</div>
+
+        <!-- How It Works Section -->
+        <section class="section">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Download your favorite Instagram content in just 4 simple steps</p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Copy Instagram Post Link</h3>
+                    <p>Open Instagram, find the video, reel, photo, or story you want to download, and copy its link.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Paste the Link</h3>
+                    <p>Return to our website and paste the Instagram URL in the download box above.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Click Download</h3>
+                    <p>Hit the "Paste Link & Download" button and wait a few seconds while we process your request.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Save Instantly</h3>
+                    <p>Your content is ready! Download it in HD quality to your device and enjoy offline.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section" style="background: var(--bg-secondary);">
+            <h2 class="section-title">Why Choose InstaGrab?</h2>
+            <p class="section-subtitle">The most reliable and feature-rich Instagram downloader available</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Download</h3>
+                    <p>Lightning-fast processing ensures your content downloads in seconds, not minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>HD Quality</h3>
+                    <p>Download videos, reels, and photos in their original high-definition quality without compression.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♾️</div>
+                    <h3>Unlimited Downloads</h3>
+                    <p>No limits, no restrictions. Download as many Instagram posts as you want, anytime.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔓</div>
+                    <h3>No Login Required</h3>
+                    <p>Download Instagram content without logging in or providing personal information.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Works perfectly on all devices - smartphones, tablets, and desktop computers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💯</div>
+                    <h3>100% Free</h3>
+                    <p>Completely free to use forever. No hidden fees, no premium plans, no subscriptions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Safe & Secure</h3>
+                    <p>Your privacy is protected. We don't store your data or track your downloads.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Works Worldwide</h3>
+                    <p>Access our service from anywhere in the world with any internet connection.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Space - Mid Content -->
+        <div class="ad-space-sidebar">Advertisement Space (300x250)</div>
+
+        <!-- FAQ Section -->
+        <section class="section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Find answers to common questions about downloading Instagram content</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Is it legal to download Instagram videos and photos?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        Downloading Instagram content for personal use is generally acceptable. However, you should respect copyright laws and the content creator's rights. Always seek permission before using downloaded content commercially or redistributing it publicly.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Do I need to install any software?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        No installation required! Our Instagram downloader is completely web-based. Simply paste the Instagram URL and download directly from your browser on any device.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Can I download private Instagram posts?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        No, our service only works with public Instagram content. We cannot and will not access private accounts or content that requires special permissions.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        What quality will my downloaded videos be?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        We provide the highest quality available from Instagram's servers. Videos and photos are downloaded in their original resolution, ensuring the best possible quality.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Is there a download limit?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        No limits! You can download unlimited Instagram videos, reels, photos, and stories without any restrictions or daily caps.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Does this work on mobile devices?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes! Our Instagram downloader is fully optimized for mobile devices including iPhones, Android phones, and tablets. Access it from any mobile browser.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Do you store my downloaded content?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        No, we do not store any content or user data. Downloads are processed in real-time and delivered directly to your device. Your privacy is our priority.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Can I download Instagram Stories?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes! Our tool supports downloading public Instagram Stories before they expire. Just copy the story link and paste it in our download box.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Space - Native In-Feed -->
+        <div class="ad-space-sidebar">Native Advertisement Space (300x250)</div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h3>InstaGrab</h3>
+                        <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1.5rem;">The fastest and most reliable Instagram downloader. Download videos, reels, photos, and stories in HD quality for free.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link">📘</a>
+                            <a href="#" class="social-link">🐦</a>
+                            <a href="#" class="social-link">📸</a>
+                            <a href="#" class="social-link">▶️</a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#" onclick="showPage('home')">Home</a></li>
+                            <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                            <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Legal</h3>
+                        <ul class="footer-links">
+                            <li><a href="#" onclick="showPage('privacy')">Privacy Policy</a></li>
+                            <li><a href="#" onclick="showPage('terms')">Terms of Service</a></li>
+                            <li><a href="#" onclick="showPage('disclaimer')">Disclaimer</a></li>
+                            <li><a href="#" onclick="showPage('dmca')">DMCA Policy</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Support</h3>
+                        <ul class="footer-links">
+                            <li><a href="#" onclick="showPage('contact')">Contact Support</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">How to Download</a></li>
+                            <li><a href="#">Report Issue</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2026 InstaGrab. All rights reserved. Not affiliated with Instagram or Meta Platforms, Inc.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <div class="legal-page">
+            <h1>About InstaGrab</h1>
+            <p class="updated-date">Learn about our mission and service</p>
+            
+            <h2>Our Mission</h2>
+            <p>InstaGrab was created to provide users with a simple, fast, and reliable way to download Instagram content for personal use. We believe in making social media content more accessible while respecting creators' rights and platform guidelines.</p>
+            
+            <h2>What We Do</h2>
+            <p>We offer a free, web-based Instagram downloader that allows users to save videos, reels, photos, stories, and audio from public Instagram posts. Our service is designed to be:</p>
+            <ul>
+                <li>Fast and efficient with instant downloads</li>
+                <li>User-friendly with a clean, intuitive interface</li>
+                <li>Secure and private with no data collection</li>
+                <li>Accessible on all devices without installation</li>
+                <li>Completely free with no hidden charges</li>
+            </ul>
+            
+            <h2>Why Choose Us?</h2>
+            <p>Unlike many other Instagram downloaders, we prioritize user experience, privacy, and reliability. We don't require account registration, we don't store your data, and we don't impose artificial limits on downloads. Our goal is to provide the best possible service while maintaining transparency and respecting user privacy.</p>
+            
+            <h2>Commitment to Quality</h2>
+            <p>We continuously update our technology to ensure compatibility with Instagram's latest features and maintain the highest download quality possible. Your satisfaction and trust are our top priorities.</p>
+            
+            <h2>Contact Us</h2>
+            <p>Have questions or feedback? We'd love to hear from you. Visit our <a href="#" onclick="showPage('contact')" style="color: var(--primary);">Contact page</a> to get in touch.</p>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section class="section">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">Have a question or need support? Send us a message!</p>
+            
+            <form class="contact-form" onsubmit="handleContact(event)">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Privacy Policy Page -->
+    <div id="privacy" class="page">
+        <div class="legal-page">
+            <h1>Privacy Policy</h1>
+            <p class="updated-date">Last Updated: February 15, 2026</p>
+            
+            <h2>1. Introduction</h2>
+            <p>Welcome to InstaGrab ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we handle your information when you use our Instagram downloader service.</p>
+            
+            <h2>2. Information We Collect</h2>
+            <h3>2.1 Information You Provide</h3>
+            <p>When you use our service, you provide Instagram URLs to download content. We do not require you to create an account or provide personal information to use our core downloading functionality.</p>
+            
+            <h3>2.2 Automatically Collected Information</h3>
+            <p>We may automatically collect certain information when you visit our website, including:</p>
+            <ul>
+                <li>IP address and general location data</li>
+                <li>Browser type and version</li>
+                <li>Device information</li>
+                <li>Pages visited and time spent on our site</li>
+                <li>Referring website addresses</li>
+            </ul>
+            
+            <h2>3. How We Use Your Information</h2>
+            <p>We use the collected information to:</p>
+            <ul>
+                <li>Process your download requests</li>
+                <li>Improve our service and user experience</li>
+                <li>Analyze usage patterns and trends</li>
+                <li>Maintain security and prevent abuse</li>
+                <li>Comply with legal obligations</li>
+            </ul>
+            
+            <h2>4. Cookies and Tracking Technologies</h2>
+            <p>Our website uses cookies and similar tracking technologies to enhance your experience. These may include:</p>
+            <ul>
+                <li>Essential cookies for site functionality</li>
+                <li>Analytics cookies to understand user behavior</li>
+                <li>Advertising cookies from third-party partners (Google AdSense)</li>
+            </ul>
+            <p>You can control cookie settings through your browser preferences.</p>
+            
+            <h2>5. Third-Party Services</h2>
+            <h3>5.1 Google AdSense</h3>
+            <p>We use Google AdSense to display advertisements. Google may use cookies to serve ads based on your prior visits to our website or other websites. You can opt out of personalized advertising by visiting Google's Ads Settings.</p>
+            
+            <h3>5.2 Analytics Services</h3>
+            <p>We may use analytics services to better understand how users interact with our website. These services may collect information about your use of our site and other websites.</p>
+            
+            <h2>6. Data Storage and Security</h2>
+            <p>We do not store downloaded Instagram content on our servers. All downloads are processed in real-time and delivered directly to your device. We implement reasonable security measures to protect any data we collect, but no method of transmission over the internet is 100% secure.</p>
+            
+            <h2>7. Your Rights</h2>
+            <p>Depending on your location, you may have certain rights regarding your personal data, including:</p>
+            <ul>
+                <li>The right to access your data</li>
+                <li>The right to correct inaccurate data</li>
+                <li>The right to request deletion of your data</li>
+                <li>The right to object to data processing</li>
+                <li>The right to data portability</li>
+            </ul>
+            
+            <h2>8. Children's Privacy</h2>
+            <p>Our service is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.</p>
+            
+            <h2>9. Changes to This Policy</h2>
+            <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page with an updated "Last Updated" date.</p>
+            
+            <h2>10. Contact Us</h2>
+            <p>If you have questions about this privacy policy or our data practices, please contact us through our <a href="#" onclick="showPage('contact')" style="color: var(--primary);">contact page</a>.</p>
+        </div>
+    </div>
+
+    <!-- Terms and Conditions Page -->
+    <div id="terms" class="page">
+        <div class="legal-page">
+            <h1>Terms and Conditions</h1>
+            <p class="updated-date">Last Updated: February 15, 2026</p>
+            
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing and using InstaGrab ("the Service"), you accept and agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you should not use our service.</p>
+            
+            <h2>2. Description of Service</h2>
+            <p>InstaGrab provides a free web-based tool that allows users to download publicly available content from Instagram, including videos, reels, photos, stories, and audio files. The service is provided "as is" without warranties of any kind.</p>
+            
+            <h2>3. User Responsibilities</h2>
+            <h3>3.1 Lawful Use</h3>
+            <p>You agree to use the Service only for lawful purposes and in accordance with these Terms. You shall not:</p>
+            <ul>
+                <li>Use the Service to download private or protected content</li>
+                <li>Violate any applicable laws or regulations</li>
+                <li>Infringe on intellectual property rights of others</li>
+                <li>Use downloaded content for commercial purposes without proper authorization</li>
+                <li>Redistribute, sell, or exploit downloaded content without permission</li>
+                <li>Attempt to abuse, overload, or disrupt the Service</li>
+            </ul>
+            
+            <h3>3.2 Copyright Compliance</h3>
+            <p>You acknowledge that downloaded content may be protected by copyright and other intellectual property laws. You are solely responsible for ensuring your use of downloaded content complies with applicable copyright laws and Instagram's terms of service.</p>
+            
+            <h2>4. Intellectual Property</h2>
+            <p>The Service, including its design, features, and functionality, is owned by InstaGrab and protected by international copyright, trademark, and other intellectual property laws. You may not copy, modify, distribute, or create derivative works based on our Service without explicit permission.</p>
+            
+            <h2>5. Disclaimer of Warranties</h2>
+            <p>The Service is provided "as is" and "as available" without any warranties of any kind, either express or implied, including but not limited to:</p>
+            <ul>
+                <li>Warranties of merchantability or fitness for a particular purpose</li>
+                <li>Accuracy, reliability, or completeness of content</li>
+                <li>Uninterrupted or error-free operation</li>
+                <li>Compatibility with Instagram's terms of service</li>
+            </ul>
+            
+            <h2>6. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, InstaGrab shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use the Service, including but not limited to:</p>
+            <ul>
+                <li>Loss of data or content</li>
+                <li>Service interruptions or errors</li>
+                <li>Unauthorized access to your device</li>
+                <li>Third-party claims or actions</li>
+            </ul>
+            
+            <h2>7. Third-Party Links and Services</h2>
+            <p>Our Service may contain links to third-party websites or services, including Instagram. We are not responsible for the content, privacy policies, or practices of any third-party sites. Your interactions with third-party services are solely between you and that third party.</p>
+            
+            <h2>8. Service Modifications and Termination</h2>
+            <p>We reserve the right to modify, suspend, or discontinue the Service at any time without notice. We may also impose limits on certain features or restrict access to parts or all of the Service without liability.</p>
+            
+            <h2>9. Indemnification</h2>
+            <p>You agree to indemnify and hold harmless InstaGrab and its affiliates from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the Service or violation of these Terms.</p>
+            
+            <h2>10. Governing Law</h2>
+            <p>These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law provisions. Any disputes shall be resolved in the appropriate courts.</p>
+            
+            <h2>11. Changes to Terms</h2>
+            <p>We reserve the right to modify these Terms at any time. Continued use of the Service after changes constitutes acceptance of the modified Terms. We will update the "Last Updated" date to reflect any changes.</p>
+            
+            <h2>12. Contact Information</h2>
+            <p>For questions about these Terms, please contact us through our <a href="#" onclick="showPage('contact')" style="color: var(--primary);">contact page</a>.</p>
+        </div>
+    </div>
+
+    <!-- Disclaimer Page -->
+    <div id="disclaimer" class="page">
+        <div class="legal-page">
+            <h1>Disclaimer</h1>
+            <p class="updated-date">Last Updated: February 15, 2026</p>
+            
+            <h2>1. General Disclaimer</h2>
+            <p>The information and services provided by InstaGrab are for general informational purposes only. While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the Service.</p>
+            
+            <h2>2. Not Affiliated with Instagram</h2>
+            <p>InstaGrab is an independent service and is not affiliated with, endorsed by, or connected to Instagram, Meta Platforms, Inc., or any of their subsidiaries or affiliates. Instagram is a trademark of Meta Platforms, Inc. All Instagram-related trademarks and logos are property of their respective owners.</p>
+            
+            <h2>3. Copyright and Content Ownership</h2>
+            <p>We do not host, store, or own any content downloaded through our Service. All content belongs to its respective copyright holders. Users are responsible for:</p>
+            <ul>
+                <li>Ensuring they have the right to download specific content</li>
+                <li>Respecting copyright laws and intellectual property rights</li>
+                <li>Obtaining necessary permissions before using downloaded content</li>
+                <li>Complying with Instagram's Terms of Service</li>
+            </ul>
+            
+            <h2>4. Personal Use Only</h2>
+            <p>Our Service is intended for personal, non-commercial use only. Users should download content only from public Instagram profiles and only for purposes that comply with applicable laws and Instagram's policies. We strongly discourage:</p>
+            <ul>
+                <li>Commercial use of downloaded content without permission</li>
+                <li>Redistribution or republication of copyrighted material</li>
+                <li>Violating content creators' intellectual property rights</li>
+                <li>Any use that infringes on others' rights or violates laws</li>
+            </ul>
+            
+            <h2>5. No Guarantee of Availability</h2>
+            <p>We do not guarantee that the Service will be available at all times or that it will work with all Instagram content. Instagram may change its policies, API, or technical infrastructure at any time, which could affect our Service's functionality.</p>
+            
+            <h2>6. User Responsibility</h2>
+            <p>By using InstaGrab, you acknowledge that:</p>
+            <ul>
+                <li>You are solely responsible for your use of downloaded content</li>
+                <li>You will respect all applicable laws and regulations</li>
+                <li>You will not hold InstaGrab liable for your actions</li>
+                <li>You understand the risks associated with downloading online content</li>
+            </ul>
+            
+            <h2>7. Fair Use Consideration</h2>
+            <p>While "fair use" provisions may allow certain uses of copyrighted material, fair use is a complex legal doctrine that varies by jurisdiction. We cannot provide legal advice about whether specific uses constitute fair use. Users should consult with legal professionals if they have questions about copyright law.</p>
+            
+            <h2>8. Third-Party Content</h2>
+            <p>We are not responsible for the accuracy, legality, or appropriateness of content available on Instagram or downloaded through our Service. Users access and use such content at their own risk.</p>
+            
+            <h2>9. Service Changes</h2>
+            <p>We reserve the right to modify, suspend, or discontinue the Service or any part thereof at any time without notice or liability. We may also update this Disclaimer periodically to reflect changes in our practices or legal requirements.</p>
+            
+            <h2>10. No Professional Advice</h2>
+            <p>Nothing on this website constitutes legal, professional, or expert advice. For specific guidance regarding copyright, intellectual property, or legal matters, please consult with qualified professionals.</p>
+            
+            <h2>11. Limitation of Liability</h2>
+            <p>To the fullest extent permitted by law, InstaGrab disclaims all liability for any damages or losses resulting from your use of the Service, including direct, indirect, incidental, consequential, or punitive damages.</p>
+            
+            <h2>12. Contact</h2>
+            <p>If you have questions about this Disclaimer, please contact us through our <a href="#" onclick="showPage('contact')" style="color: var(--primary);">contact page</a>.</p>
+        </div>
+    </div>
+
+    <!-- DMCA Policy Page -->
+    <div id="dmca" class="page">
+        <div class="legal-page">
+            <h1>DMCA Policy</h1>
+            <p class="updated-date">Last Updated: February 15, 2026</p>
+            
+            <h2>1. Overview</h2>
+            <p>InstaGrab respects the intellectual property rights of others and expects our users to do the same. In accordance with the Digital Millennium Copyright Act (DMCA) and other applicable laws, we have adopted a policy of terminating, in appropriate circumstances, access to our Service for users who are deemed to be repeat infringers.</p>
+            
+            <h2>2. Notice of Copyright Infringement</h2>
+            <p>If you believe that your copyrighted work has been downloaded or made available through our Service in a way that constitutes copyright infringement, you may submit a DMCA notice. To be effective, your notice must include:</p>
+            
+            <h3>Required Information:</h3>
+            <ul>
+                <li>Your physical or electronic signature</li>
+                <li>Identification of the copyrighted work claimed to have been infringed</li>
+                <li>Identification of the material that is claimed to be infringing, with sufficient detail for us to locate it</li>
+                <li>Your contact information (address, telephone number, email address)</li>
+                <li>A statement that you have a good faith belief that the use of the material is not authorized by the copyright owner, its agent, or the law</li>
+                <li>A statement that the information in the notification is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner</li>
+            </ul>
+            
+            <h2>3. Submitting a DMCA Notice</h2>
+            <p>You can submit your DMCA takedown notice through our <a href="#" onclick="showPage('contact')" style="color: var(--primary);">contact form</a> or by email. Please include "DMCA Takedown Notice" in the subject line.</p>
+            
+            <p><strong>Important:</strong> Submitting a DMCA notice is a legal process. Misrepresenting that material is infringing may result in liability for damages, including costs and attorneys' fees. We recommend consulting with legal counsel before submitting a notice.</p>
+            
+            <h2>4. Our Response to DMCA Notices</h2>
+            <p>Upon receiving a valid DMCA notice, we will:</p>
+            <ul>
+                <li>Review the notice to ensure it meets DMCA requirements</li>
+                <li>Take appropriate action, which may include removing access to allegedly infringing material</li>
+                <li>Notify the user who posted the content, if applicable</li>
+                <li>Document the notice and our response</li>
+            </ul>
+            
+            <h2>5. Counter-Notification</h2>
+            <p>If you believe that material you posted was removed or disabled by mistake or misidentification, you may submit a counter-notification. Your counter-notification must include:</p>
+            <ul>
+                <li>Your physical or electronic signature</li>
+                <li>Identification of the material that has been removed and its previous location</li>
+                <li>A statement under penalty of perjury that you have a good faith belief that the material was removed by mistake or misidentification</li>
+                <li>Your name, address, and telephone number</li>
+                <li>A statement that you consent to the jurisdiction of the federal court in your district and that you will accept service of process from the person who submitted the original DMCA notice</li>
+            </ul>
+            
+            <h2>6. Repeat Infringer Policy</h2>
+            <p>We maintain a policy of terminating access to our Service for users who are determined to be repeat infringers. This includes users who have received multiple valid DMCA takedown notices.</p>
+            
+            <h2>7. Important Clarifications</h2>
+            <h3>7.1 We Do Not Host Content</h3>
+            <p>InstaGrab does not host or store Instagram content on our servers. Our Service merely facilitates the download of publicly available content from Instagram's servers. All content remains on Instagram's platform.</p>
+            
+            <h3>7.2 Direct Your Concerns to Instagram</h3>
+            <p>Since we do not host content, copyright concerns should primarily be directed to Instagram/Meta, which hosts and controls the content. However, we will respond appropriately to valid DMCA notices regarding our Service's functionality.</p>
+            
+            <h3>7.3 User Responsibility</h3>
+            <p>Users of our Service are solely responsible for ensuring their use of downloaded content complies with applicable copyright laws. We provide tools; users must use them responsibly and legally.</p>
+            
+            <h2>8. Misrepresentation</h2>
+            <p>Under Section 512(f) of the DMCA, any person who knowingly materially misrepresents that material or activity is infringing, or that material or activity was removed or disabled by mistake or misidentification, may be subject to liability.</p>
+            
+            <h2>9. Changes to This Policy</h2>
+            <p>We reserve the right to modify this DMCA Policy at any time. Changes will be effective immediately upon posting to this page, with an updated "Last Updated" date.</p>
+            
+            <h2>10. Contact for DMCA Notices</h2>
+            <p>For DMCA-related inquiries, please contact us through our <a href="#" onclick="showPage('contact')" style="color: var(--primary);">contact page</a> with "DMCA" in the subject line.</p>
+            
+            <h2>11. Disclaimer</h2>
+            <p>This DMCA Policy is provided for informational purposes and does not constitute legal advice. The interpretation and enforcement of copyright law can be complex. If you have specific questions or concerns, we recommend consulting with a qualified attorney.</p>
+        </div>
+    </div>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+            
+            return false;
+        }
+
+        // FAQ Toggle
+        function toggleFAQ(button) {
+            const faqItem = button.parentElement;
+            const wasActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!wasActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        // Download Handler (Demo)
+        function handleDownload() {
+            const urlInput = document.getElementById('urlInput');
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                alert('Please paste an Instagram URL first!');
+                return;
+            }
+            
+            if (!url.includes('instagram.com')) {
+                alert('Please enter a valid Instagram URL');
+                return;
+            }
+            
+            // Demo alert - In production, this would process the download
+            alert('Demo Mode: In production, this would process your Instagram download.\n\nURL: ' + url + '\n\nThe actual implementation would:\n1. Validate the Instagram URL\n2. Fetch the content from Instagram\n3. Process and prepare the download\n4. Provide download links in HD quality');
+            
+            urlInput.value = '';
+        }
+
+        // Contact Form Handler (Demo)
+        function handleContact(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Demo alert - In production, this would send the message
+            alert('Demo Mode: Your message has been received!\n\nName: ' + name + '\nEmail: ' + email + '\nSubject: ' + subject + '\n\nIn production, this would be sent to our support team.');
+            
+            event.target.reset();
+            return false;
+        }
+
+        // Enter key support for download
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlInput = document.getElementById('urlInput');
+            if (urlInput) {
+                urlInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleDownload();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
